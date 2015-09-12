@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         mWebView.getSettings().setSupportMultipleWindows(true);
 
-        mWebView.loadUrl("http://beta.html5test.com/");
+        mWebView.loadUrl("http://104.236.202.230/");
 
     }
 
