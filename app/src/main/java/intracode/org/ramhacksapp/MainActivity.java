@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.view.KeyEvent;
+import android.graphics.Bitmap;
 
 public class MainActivity extends Activity {
 
@@ -18,6 +21,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
+        mWebView.setWebViewClient(new myWebClient());
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
@@ -27,6 +31,36 @@ public class MainActivity extends Activity {
         mWebView.loadUrl("http://104.236.202.230/");
 
     }
+
+    public class myWebClient extends WebViewClient
+    {
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            // TODO Auto-generated method stub
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            // TODO Auto-generated method stub
+
+            view.loadUrl(url);
+            return true;
+
+        }
+    }
+
+    // To handle "Back" key press event for WebView to go back to previous screen.
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
+            mWebView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
 
     @Override
